@@ -1,5 +1,5 @@
 <template>
-    <nav class="list-nav" :class="{ active: props.isActiveList, none: !props.isActiveList}">
+    <nav class="list-nav" :class=" classDinamicList">
         <ul>
             <li @click="goRoute('about')" >Acerda de nosotros</li>
             <li @click="goRoute('menu-carta')">Menú - Carta</li>
@@ -13,7 +13,9 @@
 <script setup>
 import { useRouter } from 'vue-router';
     
-const props = defineProps({'isActiveList': Boolean})
+const props = defineProps({
+    'classDinamicList': String,
+    })
 const emit = defineEmits(['triggerMenu'])
 const router = useRouter()
 
@@ -58,26 +60,26 @@ li:hover{
     transition: all 1s;
     padding: 0;
     z-index: 1;
+    left: -100%;
     top: 60px;
-    
 }
 
 .active {
-    animation: activeMenu 1s forwards;  
+    animation: activeMenu 1s forwards; 
 }
 
 .none{
-    animation: noneMenu 1.5s forwards;
+    animation: noneMenu 3.8s forwards;
 }
 
 @keyframes activeMenu {
     from{
-        
         left: -100%;
     }
 
     to{
         left: 0%;
+        top: 60px;
     }
     
 }
@@ -85,10 +87,12 @@ li:hover{
 @keyframes noneMenu {
     from{
         top: 60px;
+        left: 0%;
     }
 
     to{
         top: -100%;
+        left: 0%
     }
 }
 

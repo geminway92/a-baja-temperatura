@@ -5,13 +5,24 @@ import NavbarBase from "./components/NavbarBase.vue";
 import ListNav from "./components/ListNav.vue";
 
 
-  let isActiveList = ref(false)
-  
+  let classDinamicList = ref('')
+  let isActiveList = ref('none')  
 
   
   const triggerMenu = () => {
-    isActiveList.value = !isActiveList.value;
+  
+    // if(classDinamicList.value === ''){
+    //   classDinamicList.value = 'active'
+    // } else if( classDinamicList.value === 'active'){
+    //   classDinamicList.value = 'none'
+    // } else if ( classDinamicList.value === 'none'){
+    //   classDinamicList.value = 'active'
+    // }
 
+    ( classDinamicList.value === '' ? classDinamicList.value = 'active'
+      : classDinamicList.value === 'active' ? classDinamicList.value = 'none'
+      : classDinamicList.value === 'none' ? classDinamicList.value = 'active'
+      : '')
   }
 
 
@@ -19,7 +30,7 @@ import ListNav from "./components/ListNav.vue";
 
 <template>
   <NavbarBase @triggerMenu="triggerMenu"/>
-  <ListNav @triggerMenu="triggerMenu" :isActiveList="isActiveList" />
+  <ListNav @triggerMenu="triggerMenu" :classDinamicList="classDinamicList" />
 
   <router-view/>
 </template>
