@@ -1,7 +1,7 @@
 <template>
     <nav class="list-nav" :class=" classDinamicList">
         <ul>
-            <li @click="goRoute('about')" >Acerda de nosotros</li>
+            <li @click="goRoute('about')" >Acerca de nosotros</li>
             <li @click="goRoute('menu-carta')">Menú - Carta</li>
             <li @click="goRoute('menu-degustacion')">Menú degustación</li>
             <li @click="goRoute('carta-bebidas')">Carta Bebidas</li>
