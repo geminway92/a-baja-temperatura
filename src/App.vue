@@ -39,7 +39,8 @@ import ListNav from "./components/ListNav.vue";
 html, body{
   margin: 0;
   background-image: url('./assets/682.jpg');
-    background-position-x: 7%;
+  background-position-x: 7%;
+  height: 100vh;
 }
 
 button{
