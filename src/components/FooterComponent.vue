@@ -6,14 +6,15 @@
     <div class="footer">
         
         <div class="contact">
-            <a href="https://abajatemperatura.netlify.app/">
-                <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
+            <a href="mailto:abajatemperatura@info.com">
+                <img class="logo" src="../assets/svg/Email.svg" alt="logo a baja temperatura">
             </a>
             <a href="https://www.google.es/"  class="contact-description">
                 <img src="../assets/svg/instagram.svg" alt="">
             </a>
         </div>
-
+        
+        <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
         <p>© 2022 A baja temperatura </p>
     </div>
 </template>
@@ -29,6 +30,11 @@ a{
 p{
     margin: .5em;
 }
+
+img{
+    width: 50px;
+}
+
 .footer{
     position: absolute;
     display: flex;
@@ -42,6 +48,8 @@ p{
 
 .contact{
     display: flex;
+    align-self: flex-start;
+    padding-left: 1em;
 }
 
 .contact p {
