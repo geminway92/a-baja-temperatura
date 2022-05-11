@@ -53,7 +53,7 @@ import { ref } from "@vue/reactivity"
         </div>
         <div class="contact">
           <div class="contact-direction">
-            <img src="../assets/svg/instagram.svg" alt="">
+            <img src="../assets/icons-png/Instagram_icon.png" alt="">
             <span>SÍGUENOS</span>
           </div>
             <a href="https://www.instagram.com/felixcp41/" class="contact-description">@abajatemperatura</a>
