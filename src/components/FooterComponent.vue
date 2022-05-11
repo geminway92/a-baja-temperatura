@@ -7,7 +7,7 @@
         
         <div class="contact">
             <a href="https://www.google.es/"  class="contact-description">
-                <img src="../assets/svg/instagram.svg" alt="">
+                <img src="../assets/svg/instagram.svg" alt="instagram">
             </a>
         </div>
         
@@ -55,8 +55,7 @@ img{
 }
 
 .contact img{
-  width: min-content;
-  height: 30px;  
+  width: 30px;
 }
 
 </style>
