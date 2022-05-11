@@ -6,11 +6,8 @@
     <div class="footer">
         
         <div class="contact">
-            <a href="mailto:abajatemperatura@info.com">
-                <img class="logo" src="../assets/svg/Email.svg" alt="logo a baja temperatura">
-            </a>
             <a href="https://www.google.es/"  class="contact-description">
-                <img src="../assets/svg/instagram.svg" alt="">
+                <img src="../assets/icons-png/Instagram_icon.png" alt="">
             </a>
         </div>
         
@@ -60,7 +57,6 @@ img{
   padding-right: .9em;
   width: min-content;
   height: 30px;  
-  background: #262323;
   padding: .2em;
 }
 
