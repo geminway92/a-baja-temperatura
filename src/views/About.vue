@@ -22,18 +22,19 @@ import ContactComponent from '../components/ContactComponent.vue';
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 4em;
   color: white;
   text-align: center;
+  height: min-content;
 }
 .logo{
   border-radius: 50%;
-  margin-top: 1em;
+  margin-top: 4.5em;
   width: 200px;
 }
 
 .info-restaurant{
   font-size: 17px;
+  margin-bottom: 8em;
   padding: 1em;
 }
 

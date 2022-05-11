@@ -53,7 +53,7 @@ li:hover{
     display: flex;
     flex-direction: column;
     text-align: center;
-    position: absolute;
+    position: fixed;
     background: #daad68;
     font-weight: bold;
     width: 100%;

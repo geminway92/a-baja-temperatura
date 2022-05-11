@@ -32,9 +32,9 @@ import FooterComponent from './components/FooterComponent.vue';
 <template>
   <NavbarBase @triggerMenu="triggerMenu"/>
   <ListNav @triggerMenu="triggerMenu" :classDinamicList="classDinamicList" />
-
   <router-view/>
   <footer-component/>
+
 </template>
 
 <style>
@@ -50,7 +50,10 @@ button{
 }
 
 nav {
-  background: pink;
   padding: 1em;
+}
+
+#app{
+  position: relative;
 }
 </style>

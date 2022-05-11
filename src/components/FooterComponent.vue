@@ -30,12 +30,11 @@ p{
     margin: .5em;
 }
 .footer{
-    position: fixed;
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    bottom: 0;
     background: rgb(195,156,96);
     background: linear-gradient(355deg, rgba(195,156,96,1) 0%, rgba(95,68,39,1) 100%);
     padding: 1em 0;

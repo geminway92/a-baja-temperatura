@@ -15,5 +15,6 @@ export default {
   position: relative;
   top: 4em;
   color: white;
+  height: 100vh;
 }
 </style>
