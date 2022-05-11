@@ -6,7 +6,7 @@
     <div class="footer">
         
         <div class="contact">
-            <a href="https://www.google.es/"  class="contact-description">
+            <a href="https://www.instagram.com/felixcp41/"  class="contact-description">
                 <img src="../assets/svg/instagram.svg" alt="instagram">
             </a>
         </div>
