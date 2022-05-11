@@ -47,6 +47,7 @@ img{
     display: flex;
     align-self: flex-start;
     padding-left: 1em;
+    gap: .5em;
 }
 
 .contact p {
