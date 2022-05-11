@@ -34,7 +34,7 @@ import { ref } from "@vue/reactivity"
         <img src="../assets/svg/Phone.svg" alt="">
         <p>LLÁMANOS</p>
       </div>
-          <p class="contact-description">+34 629 86 07 86</p>
+          <a href="tel:+34 629 86 07 86" class="contact-description">+34 629 86 07 86</a>
         </div>
         <div class="contact">
             <div class="contact-direction">
@@ -42,27 +42,34 @@ import { ref } from "@vue/reactivity"
 
               <span>VISÍTANOS</span>
               </div>
-            <p class="contact-description">Av. Marife de Triana, 14, 29620 Torremolinos, Málaga</p>
+            <a href="https://goo.gl/maps/CD11JNeCReKGDngJ7" class="contact-description">Av. Marife de Triana, 14, 29620 Torremolinos, Málaga</a>
         </div>
         <div class="contact">
           <div class="contact-direction">
             <img src="../assets/svg/Email.svg" alt="">
             <span>ESCRÍBENOS</span>
           </div>
-            <p class="contact-description">abajatemperatura@info.com</p>
+          <a href="mailto:abajatemperatura@info.com" class="contact-description">abajatemperatura@info.com</a>
         </div>
         <div class="contact">
           <div class="contact-direction">
             <img src="../assets/svg/instagram.svg" alt="">
             <span>SÍGUENOS</span>
           </div>
-            <p class="contact-description">@abajatemperatura</p>
+            <a href="https://www.instagram.com/felixcp41/" class="contact-description">@abajatemperatura</a>
         </div>
 </template>
 
 <style scoped>
+a{
+  text-decoration: none;
+}
 p{
   margin: 0;
+}
+
+p:nth-child(3){
+  margin-bottom: 1em;
 }
 
 .container-shedule p {
@@ -70,7 +77,10 @@ p{
 }
 
 .contact{
-  width: 200px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contact-description  {
@@ -78,14 +88,20 @@ p{
   font-weight: bold;
   border: 2px solid black;
   background: whitesmoke;
-  width: 200px;
   margin-bottom: 1em;
+  padding: 5px 0;
+}
+
+.contact a{
+  display: block;
+  width: 80%;
 }
 
 .contact-direction{
   display: flex;
   align-items: center;
-  padding: .5em;
+  align-self: flex-start;
+  padding: .5em 2em;
   gap: .5em;
   margin: 0;
 }

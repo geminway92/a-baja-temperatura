@@ -3,6 +3,7 @@ import { ref } from 'vue';
 
 import NavbarBase from "./components/NavbarBase.vue";
 import ListNav from "./components/ListNav.vue";
+import FooterComponent from './components/FooterComponent.vue';
 
 
   let classDinamicList = ref('')
@@ -33,6 +34,7 @@ import ListNav from "./components/ListNav.vue";
   <ListNav @triggerMenu="triggerMenu" :classDinamicList="classDinamicList" />
 
   <router-view/>
+  <footer-component/>
 </template>
 
 <style>

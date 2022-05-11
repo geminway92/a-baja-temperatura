@@ -54,7 +54,7 @@ li:hover{
     flex-direction: column;
     text-align: center;
     position: absolute;
-    background: #e68d68;
+    background: #daad68;
     font-weight: bold;
     width: 100%;
     transition: all 1s;
