@@ -12,5 +12,6 @@
 .menu-dia{
   position: relative;
   top: 4em;
+  color: white;
 }
 </style>

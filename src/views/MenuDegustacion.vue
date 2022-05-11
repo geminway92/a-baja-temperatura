@@ -12,8 +12,9 @@ export default {
 
 <style>
 .degustacion{
-    position: relative;
-    top: 4em;
+  position: relative;
+  top: 4em;
+  color: white;
 }
 
 </style>

@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import About from '../components/About.vue';
-import MenuCarta from '../components/MenuCarta.vue';
-import MenuDegustacion from '../components/MenuDegustacion.vue';
-import MenuDia from '../components/MenuDia.vue';
-import CartaBebidas from '../components/CartaBebidas.vue';
+import About from '../views/About.vue';
+import MenuCarta from '../views/MenuCarta.vue';
+import MenuDegustacion from '../views/MenuDegustacion.vue';
+import MenuDia from '../views/MenuDia.vue';
+import CartaBebidas from '../views/CartaBebidas.vue';
 
 const routes = [
     { path: '/', name: 'about', component: About },

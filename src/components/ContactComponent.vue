@@ -1,20 +1,18 @@
+
 <script setup>
 import { ref } from "@vue/reactivity"
 
-  const widthMap = ref(300)
-    
-  const calcWidthScreen = () => {
-    widthMap.value = (screen.width > 400 && screen.width < 700 ? 500 :  screen.width > 700 ? 700 : 300)
+    const widthMap = ref(300)
+
+    const calcWidthScreen = () => {
+        widthMap.value = (screen.width > 400 && screen.width < 700 ? 500 :  screen.width > 700 ? 700 : 300)
     }
  
   calcWidthScreen()
-  
+    
 
 </script>
-
 <template>
-  <div class="about">
-    <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
     <div class="container-shedule">
       <h1>Horario</h1>
       <p>Martes a Domingo</p>
@@ -36,7 +34,7 @@ import { ref } from "@vue/reactivity"
         <img src="../assets/svg/Phone.svg" alt="">
         <p>LLÁMANOS</p>
       </div>
-          <p class="contact-description">+34 653 14 20 58</p>
+          <p class="contact-description">+34 629 86 07 86</p>
         </div>
         <div class="contact">
             <div class="contact-direction">
@@ -44,37 +42,27 @@ import { ref } from "@vue/reactivity"
 
               <span>VISÍTANOS</span>
               </div>
-            <p class="contact-description">Calle convaleciente, 2</p>
+            <p class="contact-description">Av. Marife de Triana, 14, 29620 Torremolinos, Málaga</p>
         </div>
         <div class="contact">
           <div class="contact-direction">
             <img src="../assets/svg/Email.svg" alt="">
             <span>ESCRÍBENOS</span>
           </div>
-            <p class="contact-description">info@larondeña.es</p>
+            <p class="contact-description">abajatemperatura@info.com</p>
         </div>
-  </div>
+        <div class="contact">
+          <div class="contact-direction">
+            <img src="../assets/svg/instagram.svg" alt="">
+            <span>SÍGUENOS</span>
+          </div>
+            <p class="contact-description">@abajatemperatura</p>
+        </div>
 </template>
 
 <style scoped>
-
-.logo{
-  border-radius: 50%;
-  margin-top: 1em;
-  width: 200px;
-}
 p{
   margin: 0;
-}
-
-.about{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  top: 4em;
-  color: white;
-  text-align: center;
 }
 
 .container-shedule p {
@@ -90,6 +78,8 @@ p{
   font-weight: bold;
   border: 2px solid black;
   background: whitesmoke;
+  width: 200px;
+  margin-bottom: 1em;
 }
 
 .contact-direction{
@@ -97,6 +87,7 @@ p{
   align-items: center;
   padding: .5em;
   gap: .5em;
+  margin: 0;
 }
 
 .contact img{
@@ -107,5 +98,4 @@ p{
   border-radius: 20px;
   padding: .3em;
 }
-
 </style>
