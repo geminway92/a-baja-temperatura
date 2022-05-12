@@ -19,7 +19,7 @@ import { ref } from "@vue/reactivity"
       <p>Síguenos</p>
       <div class="flex">
         <a href="https://www.instagram.com/felixcp41/" class="contact-description">
-          <img class="icon-ig" src="../assets/icons-png/Instagram_icon.png" alt="instagram">
+          <img class="icon-ig" src="../assets/svg/instagram.svg" alt="instagram">
         </a>
       </div>
     </div>
@@ -95,7 +95,6 @@ p {
   padding-right: .9em;
   width: min-content;
   height: 15px;  
-  // background: #262323;
   border-radius: 20px;
   padding: .2em;
 }

@@ -9,8 +9,7 @@ import ContactComponent from './ContactComponent.vue';
             <contact-component/>
         </div>
         
-            <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
-            <p>© 2022 A baja temperatura </p>
+        <p>© 2022 A baja temperatura </p>
     </div>
 </template>
 
