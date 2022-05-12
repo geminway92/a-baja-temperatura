@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "@vue/reactivity"
+import { computed } from "@vue/runtime-core";
 
-const emit = defineEmits(['triggerMenu', 'getReserveApi'])
+const emit = defineEmits(['receiveValue', 'getReserveApi'])
 
 
 const props = defineProps({
@@ -18,6 +19,12 @@ const props = defineProps({
     })
 
 let valueInput = ref(props.checkedHour);
+
+const passValueInput = computed(() => {
+    emit('receiveValue', valueInput.value)
+    return props.checkedHour
+})
+
 
 
 </script>

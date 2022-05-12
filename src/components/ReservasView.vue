@@ -1,11 +1,11 @@
 <template>
     <div class="reservasView">
-        <form @submit.prevent="onEventClick">
+        <form @submit.prevent="validateForm">
             <label for="dateReserva">Elige fecha</label>
             <input v-model="dateSelect" id="dateReserva" type="date" :min="attributeMin" required @change="getReserveApi">
 
             <div class="container-toggle-hour" @change="getReserveApi">
-                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" :checkedHour="checkedHour" />
+                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
             </div>
             
             <div class="container-toggle-tab">
@@ -94,7 +94,7 @@ const toast = useToast();
 
     const paramsModal = {
         position: "top-center",
-        timeout: 5000,
+        timeout: 4000,
         closeOnClick: true,
         pauseOnFocusLoss: true,
         pauseOnHover: true,
@@ -107,37 +107,50 @@ const toast = useToast();
         rtl: false
     }
 
-        const onEventClick = async ()  => {
-           const isAvailableTable =  checkTableByDinners()
-           
-               console.log(checkedHour.value, 'modifica')
-           if(isAvailableTable){
-               try{
-                    await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, zoneReserve: checkedTable, clientReserve: clientForm.value } )
+    const validateForm = () => {
+        const isAvailableTable =  checkTableByDinners()
+        const hourIsPass = checkHourIsPass()
+
+        if(!isAvailableTable){
+            return emit('modal', 'No hay mesas suficientes, prueba a otra hora', paramsModal, 'error' )
+        }
+
+        if(!hourIsPass){
+            return 
+        }
+        if(!checkedHour.value){
+            return emit('modal', 'Elige una hora', paramsModal, 'error')
+        }
+
+        postReserve()
     
-                    emit('modal', 'Reserva Realizada', paramsModal )
+    }
 
-                    getReserveApi()
+        
+        const postReserve = async ()  => {
 
-                    clientForm.value = {
-                        name: '',
-                        diners: 1,
-                        phone: '',
-                    },
-                    checkedPrivacity = false
+            try{
+                const {data} = await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
+                console.log('se ha realizado', data)
+                emit('modal', 'Reserva Realizada', paramsModal )
+                
+                getReserveApi()
 
-                }catch (error){
-                 emit('modal', error.message, paramsModal, 'error' )
-                }
-            }else{
-                 emit('modal', 'No hay mesas suficientes, prueba a otra hora', paramsModal, 'error' )
+                clientForm.value = {
+                    name: '',
+                    diners: 1,
+                    phone: '',
+                },
+                checkedPrivacity.value = false
+
+            }catch (error){
+                emit('modal', error.message, paramsModal, 'error' )
             }
             
         };
 
         const getReserveApi = async ( ) => {
 
-            console.log('check', checkedHour.value,)
             checkHourIsPass()
                 
             const {data} = await reserveApi.get('reserves.json' )
@@ -159,10 +172,9 @@ const toast = useToast();
                 : clientForm.value.diners > 8  && clientForm.value.diners <= 12 ?  tableNeed = 3
                 : clientForm.value.diners > 12 && clientForm.value.diners <= 16 ? tableNeed = 4
                 : clientForm.value.diners > 16 && clientForm.value.diners <= 20 ? tableNeed = 5
-                : tableNeed = 'No Disponible'
-            console.table(clientForm.value)
+                : tableNeed = 'No Disponible';
             
-            if(checkedTable === 'Interior'){
+            if(checkedTable.value === 'Interior'){
             
                 if(tableNeed <= tableAvailableInterior.value){
                      return true;
@@ -194,14 +206,17 @@ const toast = useToast();
             const hourActual = `${dayActual.getHours()}:${dayActual.getMinutes()}`
             let dayActualShort = dayActual.toISOString().substring(0,10)
                 dateSelect.value = new Date(dateSelect.value).toISOString().substring(0, 10);
-    
+            
             if( dayActualShort === dateSelect.value && checkedHour.value < hourActual ){
                 emit('modal', 'Hora inferior de la actual', paramsModal, 'error'  )
                 putHourActual()
+                return false
             }else if(dayActualShort > dateSelect.value ){
                 emit('modal', 'El día es anterior al actual', paramsModal, 'error' )
                 checkedHour.value = null
+                return false
             }
+            return true;
                 
         };
 
@@ -220,8 +235,6 @@ const toast = useToast();
             if(hourActual <= '12:00'){
                 checkedHour.value = '12:00'
                 
-            }else {
-                checkedHour.value = `${hours + 1}:00`
             }
 
         }
@@ -229,6 +242,11 @@ const toast = useToast();
         const atributteMinInput = () => {
             attributeMin.value =  new Date().toISOString().substring(0, 10);
             dateSelect.value = attributeMin.value;
+        }
+
+        const receiveValue = ( valueInput ) => {
+            console.log(valueInput, 'esoo')
+           return checkedHour.value = valueInput
         }
 
         atributteMinInput()
