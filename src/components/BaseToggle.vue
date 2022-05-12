@@ -15,10 +15,6 @@ const props = defineProps({
         type: String,
         default: '#6bd098'
     },
-    hoverColor: {
-        type: String,
-        default: '#61940a'
-    }
     })
 
 let valueInput = ref(props.checkedHour);
@@ -60,7 +56,6 @@ label{
 }
 
 .toggle-hour label:hover {
-    background: v-bind(hoverColor) !important;
     position: relative;
     left: 5px;
 }
