@@ -1,32 +1,20 @@
 <script setup>
-
+import ContactComponent from './ContactComponent.vue';
 
 </script>
 <template>
     <div class="footer">
-        
-        <div class="contact">
-            <a href="https://www.google.es/"  class="contact-description">
-                <img src="../assets/icons-png/Instagram_icon.png" alt="">
-            </a>
+        <div class="container-items">
+            
+            <contact-component/>
         </div>
         
-        <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
-        <p>© 2022 A baja temperatura </p>
+            <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
+            <p>© 2022 A baja temperatura </p>
     </div>
 </template>
 
 <style scoped>
-a{
-    text-decoration: none;
-    color: #262323;
-    font-weight: bold;
-    padding-left: .3em;
-}
-
-p{
-    margin: .5em;
-}
 
 img{
     width: 50px;
@@ -38,20 +26,14 @@ img{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background: rgb(195,156,96);
-    background: linear-gradient(355deg, rgba(195,156,96,1) 0%, rgba(95,68,39,1) 100%);
+    background: #daad68;
     padding: 1em 0;
 }
 
-.contact{
+.container-items{
     display: flex;
-    align-self: flex-start;
-    padding-left: 1em;
-    gap: .5em;
-}
-
-.contact p {
-    margin: 0;
+    justify-content: space-around;
+    margin-bottom: 1.2em;
 }
 
 .contact img{
@@ -60,5 +42,6 @@ img{
   height: 30px;  
   padding: .2em;
 }
+
 
 </style>

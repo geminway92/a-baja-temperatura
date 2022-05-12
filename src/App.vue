@@ -12,14 +12,6 @@ import FooterComponent from './components/FooterComponent.vue';
   
   const triggerMenu = () => {
   
-    // if(classDinamicList.value === ''){
-    //   classDinamicList.value = 'active'
-    // } else if( classDinamicList.value === 'active'){
-    //   classDinamicList.value = 'none'
-    // } else if ( classDinamicList.value === 'none'){
-    //   classDinamicList.value = 'active'
-    // }
-
     ( classDinamicList.value === '' ? classDinamicList.value = 'active'
       : classDinamicList.value === 'active' ? classDinamicList.value = 'none'
       : classDinamicList.value === 'none' ? classDinamicList.value = 'active'
@@ -37,12 +29,14 @@ import FooterComponent from './components/FooterComponent.vue';
 
 </template>
 
-<style>
+<style lang="scss">
+@import "./assets/scss/variables.scss";
+
 html, body{
   margin: 0;
-  background-image: url('./assets/682.jpg');
-  background-position-x: 7%;
   height: 100vh;
+  color: $text;
+  background: $backgroundColor;
 }
 
 button{
