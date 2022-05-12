@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "@vue/reactivity";
 import { useToast } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
@@ -16,6 +17,14 @@ const modal = ( ParamsModal, optionsModal, type ) => {
     toast.success(ParamsModal, optionsModal );
 
 }  
+
+const widthMap = ref(300)
+
+const calcWidthScreen = () => {
+  widthMap.value = (screen.width > 400 && screen.width < 700 ? 400 :  screen.width > 700 ? 700 : 300)
+  }
+ 
+  calcWidthScreen()
 
 </script>
 

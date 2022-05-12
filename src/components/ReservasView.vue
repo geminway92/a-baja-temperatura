@@ -2,7 +2,7 @@
     <div class="reservasView">
         <form @submit.prevent="validateForm">
             <label for="dateReserva">Elige fecha</label>
-            <input v-model="dateSelect" id="dateReserva" type="date" :min="attributeMin" required @change="getReserveApi">
+            <input v-model="dateSelect" id="dateReserva" type="date"  required @change="getReserveApi">
 
             <div class="container-toggle-hour" @change="getReserveApi">
                 <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
@@ -50,7 +50,7 @@
 
 <script setup>
 import reserveApi from '../api/reserveApi'
-import { ref } from '@vue/runtime-core';
+import { computed, ref } from '@vue/runtime-core';
 import { useToast } from "vue-toastification";
 
 import BaseToggle from './BaseToggle.vue';
@@ -64,8 +64,8 @@ const toast = useToast();
         name: '',
         diners: 1,
         phone: '',
-
     });
+
     let checkedHour =  ref(null);
     let checkedTable =  ref('Interior');
     let checkedPrivacity =  ref(false);
@@ -122,7 +122,7 @@ const toast = useToast();
             return emit('modal', 'Elige una hora', paramsModal, 'error')
         }
 
-        postReserve()
+        postReserve( isAvailableTable )
     
     }
 
@@ -130,8 +130,7 @@ const toast = useToast();
         const postReserve = async ()  => {
 
             try{
-                const {data} = await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
-                console.log('se ha realizado', data)
+                const {data} = await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, numbTableReserve: isAvailableTable,  zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
                 emit('modal', 'Reserva Realizada', paramsModal )
                 
                 getReserveApi()
@@ -149,21 +148,6 @@ const toast = useToast();
             
         };
 
-        const getReserveApi = async ( ) => {
-
-            checkHourIsPass()
-                
-            const {data} = await reserveApi.get('reserves.json' )
-            if(!data){
-                console.log(data, 'data es null')
-                return;
-            }
-                console.log(data)
-            const dataEntries = Object.values(data)
-            
-            checkAvailebleAllZone(dataEntries)
-        };
-
         const checkTableByDinners = () => {
             let tableNeed = 1
             
@@ -177,13 +161,13 @@ const toast = useToast();
             if(checkedTable.value === 'Interior'){
             
                 if(tableNeed <= tableAvailableInterior.value){
-                     return true;
+                     return tableNeed;
                 }else{
                      return false;
                 }
             }else{
                 if(tableNeed <= tableAvailableExterior.value){
-                     return true
+                     return tableNeed
                 }else{
                      return false;
                 }
@@ -197,21 +181,58 @@ const toast = useToast();
             tableAvailableInterior.value = 16 -  reserveFilterInterior.length
             tableAvailableExterior.value = 9 - reserveFilterExterior.length
 
-            console.log(reserveFilterInterior, reserveFilterExterior)
+            console.log('Interior',reserveFilterInterior, 'exterior', reserveFilterExterior)
+        };
+
+        
+
+        const dateActual = () => {
+            const date = new Date()
+            const day = date.getDate()
+            const month = (date.getMonth() + 1).toString().padStart(2,0)
+            const year = date.getFullYear().toString().padStart(2,0)
+
+            const dateActual = `${year}-${month}-${day}`
+            attributeMin.value =  dateActual
+            return dateActual;
+        }
+
+        const hourActual = () => {
+            const dayActual = new Date()
+            let hours = dayActual.getHours().toString().padStart(2,0);
+            let minutes = dayActual.getMinutes().toString().padStart(2,0);
+            
+            
+            const hoursActual = `${ hours }:${minutes}`
+            return hoursActual;
+        }
+
+        const getReserveApi = async ( ) => {
+
+            checkHourIsPass()
+
+            const {data} = await reserveApi.get('reserves.json' )
+            if(!data){
+                return;
+            }
+
+            const dataEntries = Object.values(data)            
+            checkAvailebleAllZone(dataEntries)
         };
 
         const checkHourIsPass = () => {
-            let dayActual = new Date()
-            
-            const hourActual = `${dayActual.getHours()}:${dayActual.getMinutes()}`
-            let dayActualShort = dayActual.toISOString().substring(0,10)
+            let dayActual = dateActual()
+            let hourMinActual = hourActual()
+        
+            if(!dateSelect.value){
+                dateSelect.value = attributeMin.value
+            }
                 dateSelect.value = new Date(dateSelect.value).toISOString().substring(0, 10);
-            
-            if( dayActualShort === dateSelect.value && checkedHour.value < hourActual ){
+                console.log('dia actual', dayActual,'fechaselec', dateSelect.value)
+            if( dayActual === dateSelect.value && checkedHour.value < hourMinActual ){
                 emit('modal', 'Hora inferior de la actual', paramsModal, 'error'  )
-                putHourActual()
                 return false
-            }else if(dayActualShort > dateSelect.value ){
+            }else if(dayActual > dateSelect.value ){
                 emit('modal', 'El día es anterior al actual', paramsModal, 'error' )
                 checkedHour.value = null
                 return false
@@ -220,38 +241,11 @@ const toast = useToast();
                 
         };
 
-        const putHourActual = () => {
-            console.log()
-            const dayActual = new Date()
-            let hours = dayActual.getHours();
-            let minutes = dayActual.getMinutes();
-            
-            hours = hours <= 9 ? `${hours}`.padStart(2, 0) : hours;
-            minutes = minutes <= 9 ? `${minutes}`.padStart(2, 0) : minutes;
-            
-            const hourActual = `${hours}:${minutes}`
-            console.log(hourActual)
-           
-            if(hourActual <= '12:00'){
-                checkedHour.value = '12:00'
-                
-            }
-
-        }
-
-        const atributteMinInput = () => {
-            attributeMin.value =  new Date().toISOString().substring(0, 10);
-            dateSelect.value = attributeMin.value;
-        }
-
         const receiveValue = ( valueInput ) => {
-            console.log(valueInput, 'esoo')
            return checkedHour.value = valueInput
         }
 
-        atributteMinInput()
         getReserveApi()
-        putHourActual()
 
 </script>
 

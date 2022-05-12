@@ -1,15 +1,5 @@
 
 <script setup>
-import { ref } from "@vue/reactivity"
-
-    const widthMap = ref(300)
-
-    const calcWidthScreen = () => {
-        widthMap.value = (screen.width > 400 && screen.width < 700 ? 400 :  screen.width > 700 ? 700 : 300)
-    }
- 
-  calcWidthScreen()
-    
 
 </script>
 <template>
