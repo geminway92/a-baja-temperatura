@@ -14,6 +14,10 @@ const props = defineProps({
     bgColor: {
         type: String,
         default: '#6bd098'
+    },
+    hoverColor: {
+        type: String,
+        default: '#61940a'
     }
     })
 
@@ -25,7 +29,7 @@ let valueInput = ref(props.checkedHour);
 <template>
     <div class="toggle-hour" @change="emit('getReserveApi')" >
         <input :id="hour" type="radio" name="hour" :value="hour" v-model="valueInput">
-        <label :style="`background:${ bgColor }; color: ${txtColor}`" :for="hour">{{ hour }}</label>
+        <label :for="hour">{{ hour }}</label>
     </div>
 </template>
 
@@ -48,13 +52,15 @@ label{
     
 }
 .toggle-hour label {
+    background: v-bind(bgColor);
+    color: v-bind(txtColor);
     cursor: pointer;
     padding: .5em;
     border-radius: 5px;
 }
 
 .toggle-hour label:hover {
-    background: #9c6b67;
+    background: v-bind(hoverColor) !important;
     position: relative;
     left: 5px;
 }
