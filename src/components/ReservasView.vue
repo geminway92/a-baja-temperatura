@@ -9,15 +9,7 @@
             </div>
             
             <div class="container-toggle-tab">
-
-                <div>
-                    <input id="tableInterior" type="radio" name="tableInterior"  value="Interior"  v-model="checkedTable">
-                    <label for="tableInterior">Mesa Interior</label>
-                </div>
-                <div>
-                    <input id="tableExterior" type="radio" name="tableExterior"  value="Exterior"  v-model="checkedTable">
-                    <label for="tableExterior">Mesa Exterior</label>
-                </div>
+                <base-input v-for="zone in tableZone" :key="zone" type="radio" :zone="zone" :checkedTable="checkedTable" @click="valueTable(zone.tableLocation)"/>
             </div>
 
             <div class="available-number">
@@ -54,6 +46,7 @@ import { computed, ref } from '@vue/runtime-core';
 import { useToast } from "vue-toastification";
 
 import BaseToggle from './BaseToggle.vue';
+import BaseInput from './BaseInput.vue';
 
 const emit = defineEmits(['modal'])
 const toast = useToast();
@@ -90,6 +83,11 @@ const toast = useToast();
     '22:30',
     '23:00',
     '23:30',
+]
+
+const tableZone = [
+    { tableLocation: 'Interior', textLabel: 'Mesa Interior' },
+    { tableLocation: 'Exterior', textLabel: 'Mesa Exterior' },
 ]
 
     const paramsModal = {
@@ -180,12 +178,13 @@ const toast = useToast();
         const checkAvailebleAllZone = async (reservesArray) => {
             let counterDinnerInterior = 0;
             let counterDinnerExterior = 0;
-            const reserveFilterInterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
+            
+            reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
                     .forEach(element => {
                        counterDinnerInterior = counterDinnerInterior + element.numbTableReserve
                     });
 
-            const reserveFilterExterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
+            reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
                 .forEach(element => {
                        counterDinnerExterior = counterDinnerExterior + element.numbTableReserve
                     });
@@ -215,7 +214,6 @@ const toast = useToast();
         }
 
         const getReserveApi = async ( ) => {
-
             checkHourIsPass()
 
             const {data} = await reserveApi.get('reserves.json' )
@@ -252,6 +250,11 @@ const toast = useToast();
            return checkedHour.value = valueInput
         }
 
+        const valueTable = ( valueInput ) => {
+            console.log(valueInput)
+            return checkedTable.value = valueInput
+        }
+
         getReserveApi()
 
 </script>
@@ -259,6 +262,7 @@ const toast = useToast();
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 
+//quitar luego al pasar
 label{
     font-size: 1em;
     font-weight: bold;
@@ -298,6 +302,7 @@ button:active{
     flex-wrap: wrap;
 }
 
+//quitar luego al pasar
 
 input[type="text"], input[type="email"], input[type="number"], input[type="tel"], textarea {
     padding: .5em;
