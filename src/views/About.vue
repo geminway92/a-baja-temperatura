@@ -35,7 +35,7 @@ const calcWidthScreen = () => {
     <div class="container-shedule">
       <h1>Horario</h1>
       <p>Martes a Domingo</p>
-      <p>12:00 - 16:30 | 20:30 - 00:00</p>
+      <p>12:00 - 16:30 | 20:30 - 23:00</p>
     </div>
 
     <iframe  
