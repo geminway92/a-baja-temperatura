@@ -2,7 +2,7 @@
     <div class="reservasView">
         <form @submit.prevent="validateForm">
             <label for="dateReserva">Elige fecha</label>
-            <input v-model="dateSelect" id="dateReserva" type="date"  required @change="getReserveApi">
+            <input v-model="dateSelect" id="dateReserva" type="date" :min="attributeMin"  required @change="getReserveApi">
 
             <div class="container-toggle-hour" @change="getReserveApi">
                 <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
@@ -108,10 +108,10 @@ const toast = useToast();
     }
 
     const validateForm = () => {
-        const isAvailableTable =  checkTableByDinners()
+        const {isAvailable, tableNeed} =  checkTableByDinners()
         const hourIsPass = checkHourIsPass()
 
-        if(!isAvailableTable){
+        if(!isAvailable){
             return emit('modal', 'No hay mesas suficientes, prueba a otra hora', paramsModal, 'error' )
         }
 
@@ -122,12 +122,12 @@ const toast = useToast();
             return emit('modal', 'Elige una hora', paramsModal, 'error')
         }
 
-        postReserve( isAvailableTable )
+        postReserve( tableNeed )
     
     }
 
         
-        const postReserve = async ()  => {
+        const postReserve = async ( isAvailableTable )  => {
 
             try{
                 const {data} = await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, numbTableReserve: isAvailableTable,  zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
@@ -159,15 +159,15 @@ const toast = useToast();
                 : tableNeed = 'No Disponible';
             
             if(checkedTable.value === 'Interior'){
-            
-                if(tableNeed <= tableAvailableInterior.value){
-                     return tableNeed;
+                if(tableNeed <= tableAvailableInterior.value ){
+                    return {isAvailable: true, tableNeed};
                 }else{
-                     return false;
+                    return false;
                 }
             }else{
+                console.log('necesito', tableNeed, 'tengo', tableAvailableExterior.value)
                 if(tableNeed <= tableAvailableExterior.value){
-                     return tableNeed
+                     return {isAvailable: true, tableNeed};
                 }else{
                      return false;
                 }
@@ -175,13 +175,25 @@ const toast = useToast();
         };
 
         const checkAvailebleAllZone = async (reservesArray) => {
-            const reserveFilterInterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior');
-            const reserveFilterExterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior');
-            
-            tableAvailableInterior.value = 16 -  reserveFilterInterior.length
-            tableAvailableExterior.value = 9 - reserveFilterExterior.length
+            let counterDinnerInterior = 0;
+            let counterDinnerExterior = 0;
+            const reserveFilterInterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
+                    .forEach(element => {
+                       counterDinnerInterior = counterDinnerInterior + element.numbTableReserve
+                       console.log(counterDinnerInterior, 'mesas ocupadas')
+                       console.log('comensales', element)
+                    });;
 
-            console.log('Interior',reserveFilterInterior, 'exterior', reserveFilterExterior)
+                    console.log(counterDinnerInterior, 'total ocupadas')
+                    console.log(counterDinnerExterior, 'total ocupadas')
+            const reserveFilterExterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
+                .forEach(element => {
+                       counterDinnerExterior = counterDinnerExterior + element.numbTableReserve
+                       console.log(counterDinnerExterior, 'mesas ocupadas')
+                       console.log('comensales', element)
+                    });;
+            tableAvailableInterior.value = 16 -  counterDinnerInterior
+            tableAvailableExterior.value = 9 - counterDinnerExterior
         };
 
         
