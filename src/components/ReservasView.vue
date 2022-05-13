@@ -130,16 +130,20 @@ const toast = useToast();
         const postReserve = async ( isAvailableTable )  => {
 
             try{
-                const {data} = await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, numbTableReserve: isAvailableTable,  zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
+                await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, numbTableReserve: isAvailableTable,  zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
                 emit('modal', 'Reserva Realizada', paramsModal )
                 
                 getReserveApi()
 
-                //TODO limpiar formulario 
-                Object.keys(clientForm.value).forEach( e => {
-                    clientForm.value[e] = ''
+                Object.keys(clientForm.value).forEach( key => {
+                    if(key === 'diners'){
+                        clientForm.value[key] = 1
+                        return 
+                    }
+
+                    clientForm.value[key] = ''
                 })
-                clientForm.value.diners = 1
+        
                 checkedPrivacity.value = false
 
             }catch (error){
@@ -179,9 +183,7 @@ const toast = useToast();
             const reserveFilterInterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
                     .forEach(element => {
                        counterDinnerInterior = counterDinnerInterior + element.numbTableReserve
-    
-    
-                    });;
+                    });
 
             const reserveFilterExterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
                 .forEach(element => {
@@ -209,9 +211,7 @@ const toast = useToast();
             let hours = dayActual.getHours().toString().padStart(2,0);
             let minutes = dayActual.getMinutes().toString().padStart(2,0);
             
-            
-            const hoursActual = `${ hours }:${minutes}`
-            return hoursActual;
+            return `${ hours }:${minutes}`;
         }
 
         const getReserveApi = async ( ) => {
