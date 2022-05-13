@@ -135,11 +135,11 @@ const toast = useToast();
                 
                 getReserveApi()
 
-                clientForm.value = {
-                    name: '',
-                    diners: 1,
-                    phone: '',
-                },
+                //TODO limpiar formulario 
+                Object.keys(clientForm.value).forEach( e => {
+                    clientForm.value[e] = ''
+                })
+                clientForm.value.diners = 1
                 checkedPrivacity.value = false
 
             }catch (error){
@@ -165,7 +165,6 @@ const toast = useToast();
                     return false;
                 }
             }else{
-                console.log('necesito', tableNeed, 'tengo', tableAvailableExterior.value)
                 if(tableNeed <= tableAvailableExterior.value){
                      return {isAvailable: true, tableNeed};
                 }else{
@@ -180,18 +179,14 @@ const toast = useToast();
             const reserveFilterInterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
                     .forEach(element => {
                        counterDinnerInterior = counterDinnerInterior + element.numbTableReserve
-                       console.log(counterDinnerInterior, 'mesas ocupadas')
-                       console.log('comensales', element)
+    
+    
                     });;
 
-                    console.log(counterDinnerInterior, 'total ocupadas')
-                    console.log(counterDinnerExterior, 'total ocupadas')
             const reserveFilterExterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
                 .forEach(element => {
                        counterDinnerExterior = counterDinnerExterior + element.numbTableReserve
-                       console.log(counterDinnerExterior, 'mesas ocupadas')
-                       console.log('comensales', element)
-                    });;
+                    });
             tableAvailableInterior.value = 16 -  counterDinnerInterior
             tableAvailableExterior.value = 9 - counterDinnerExterior
         };
@@ -240,7 +235,7 @@ const toast = useToast();
                 dateSelect.value = attributeMin.value
             }
                 dateSelect.value = new Date(dateSelect.value).toISOString().substring(0, 10);
-                console.log('dia actual', dayActual,'fechaselec', dateSelect.value)
+        
             if( dayActual === dateSelect.value && checkedHour.value < hourMinActual ){
                 emit('modal', 'Hora inferior de la actual', paramsModal, 'error'  )
                 return false
