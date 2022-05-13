@@ -9,7 +9,17 @@
             </div>
             
             <div class="container-toggle-tab">
-                <base-input v-for="zone in tableZone" :key="zone" type="radio" :zone="zone" :checkedTable="checkedTable" @click="valueTable(zone.tableLocation)"/>
+                <base-input v-for="zone in tableZone" 
+                    :id="zone.tableLocation"
+                    :name="zone.tableLocation"
+                    :textLabel="zone.textLabel"
+                    :key="zone" 
+                    type="radio" 
+                    :zone="zone"
+                    :model="checkedTable" 
+                    :value="zone.tableLocation" 
+                    @click="valueTable(zone.tableLocation)"
+                />
             </div>
 
             <div class="available-number">
@@ -17,7 +27,7 @@
                 <p><span :class="{available: tableAvailableExterior,'not-available': tableAvailableExterior === 0  }">{{tableAvailableExterior}}</span> Disponible Exterior</p>
             </div>
 
-
+            <!-- <base-input type="text"  /> -->
             <label for="nameInput">Nombre*:</label>
             <input id="nameInput" type="text" required v-model="clientForm.name">
             
