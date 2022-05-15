@@ -1,28 +1,41 @@
 <script setup>
 import { ref } from "@vue/reactivity"
-import { computed } from "@vue/runtime-core"
+
 
 const props = defineProps({
     type: String,
-    zone: Object,
-    model: String,
+    value: String,
+    valueModal: String,
     id: String,
     textLabel: String,
     name: String,
-    value: String
+    required: String,
+    isRowReverse: {
+        type: Boolean,
+        default: false
+    },
+    isInline: {
+        type: Boolean,
+        default: false
+    }
 })
+
+const emit = defineEmits(['input'])
+
 
 </script>
 <template>
-    <div>
+    <div :class="{'row-reverse d-flex': isRowReverse }">
+        <label :class="{'d-block pb-1': !isInline }" :for="id">{{textLabel}}</label>
         <input 
+            v-model="valueModal"
+            :value="value"
             :id="id" 
             :type="type" 
             :name="name"  
-            :value="value" 
-            v-model="model"
+            :required="required"
+            @input="emit('input', value)"
         >
-        <label :for="id">{{textLabel}}</label>
     </div>
 </template>
 
@@ -36,4 +49,5 @@ label{
     font-size: 1em;
     font-weight: bold;
 }
+
 </style>

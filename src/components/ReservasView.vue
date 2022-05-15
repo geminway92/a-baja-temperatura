@@ -8,17 +8,19 @@
                 <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
             </div>
             
-            <div class="container-toggle-tab">
-                <base-input v-for="zone in tableZone" 
+            <div class="container-toggle-tab" @click="test">
+                <base-input 
+                    v-for="zone in tableZone" 
+                    :key="zone" 
                     :id="zone.tableLocation"
                     :name="zone.tableLocation"
                     :textLabel="zone.textLabel"
-                    :key="zone" 
                     type="radio" 
                     :zone="zone"
-                    :model="checkedTable" 
+                    isRowReverse
+                    :valueModal="checkedTable"
                     :value="zone.tableLocation" 
-                    @click="valueTable(zone.tableLocation)"
+                    @input="valueSelected('checkedTable',$event)"
                 />
             </div>
 
@@ -27,15 +29,23 @@
                 <p><span :class="{available: tableAvailableExterior,'not-available': tableAvailableExterior === 0  }">{{tableAvailableExterior}}</span> Disponible Exterior</p>
             </div>
 
-            <!-- <base-input type="text"  /> -->
-            <label for="nameInput">Nombre*:</label>
+            <!-- <base-input 
+                v-for="input in inputFormUser"
+                :key="input"
+                :id="input.id"
+                :textLabel="input.label"               
+                required="true"
+                type="text"
+                
+            /> -->
+            <!-- <label for="nameInput">Nombre*:</label>
             <input id="nameInput" type="text" required v-model="clientForm.name">
             
             <label for="phoneInput">Teléfono*:</label>
             <input id="phoneInput" type="tel" pattern="[0-9]{9}" required v-model="clientForm.phone">
             
             <label for="clientInput">Comensales*:</label>
-            <input id="clintInput" type="number" min="1" required v-model="clientForm.diners">
+            <input id="clintInput" type="number" min="1" required v-model="clientForm.diners"> -->
 
             <span class="privacity-container">
                 <input type="checkbox" id="privacity-clausula" v-model="checkedPrivacity" required >
@@ -76,7 +86,7 @@ const toast = useToast();
     let tableAvailableExterior = ref(9);
     let attributeMin = ref('');
 
-    const sheduleHourArray = [
+const sheduleHourArray = [
     '12:00',
     '12:30',
     '14:00',
@@ -95,7 +105,13 @@ const toast = useToast();
 
 const tableZone = [
     { tableLocation: 'Interior', textLabel: 'Mesa Interior' },
-    { tableLocation: 'Exterior', textLabel: 'Mesa Exterior' },
+    { tableLocation: 'Exterior', textLabel: 'Mesa Exterior'},
+]
+
+const inputFormUser = [ 
+    {label: 'Nombre*:', id: 'nameInput' , model: 'name' },
+    {label: 'Teléfono*:', id: 'phoneInput', model: 'phone' },
+    {label: 'Comensales*:', id: 'clientInput', model: 'diners'},
 ]
 
     const paramsModal = {
@@ -258,9 +274,18 @@ const tableZone = [
            return checkedHour.value = valueInput
         }
 
-        const valueTable = ( valueInput ) => {
-            console.log(valueInput)
-            return checkedTable.value = valueInput
+        const valueSelected = ( modalValue, valueInput ) => {
+            if(modalValue === 'checkedTable'){
+                checkedTable.value = valueInput
+                console.log('cambia valor')
+            }
+            
+            if(modalValue === 'checkedHour'){
+                checkedHour.value = valueInput
+            }
+            console.log(modalValue,valueInput)
+            console.log(checkedTable.value)
+           return valueInput
         }
 
         getReserveApi()
