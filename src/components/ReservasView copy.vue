@@ -9,16 +9,20 @@
             </div>
             
             <div class="container-toggle-tab">
-                <base-radio 
+                <base-radio id="Interior" textLabel="Mesa interior" :value="'Interior'" @change="valueSelected('checkedTable',$event)" isRowReverse></base-radio>
+                
+                <base-radio id="Exterior" textLabel="Mesa exterior" :value="'Exterior'" @change="valueSelected('checkedTable',$event)" isRowReverse></base-radio>
+
+                <!--<base-radio 
                     v-for="zone in tableZone" 
                     :key="zone" 
                     :id="zone.tableLocation"
-                    :value="zone.tableLocation"
+                    :name="zone.tableLocation"
                     :textLabel="zone.textLabel"
-                    :valueSelected="checkedTable"
-                    @change="valueSelected('checkedTable',$event.target.value )"
+                    :value="checkedTable"
+                    @change="valueSelected('checkedTable',$event)"
                     isRowReverse
-                />
+                />-->
             </div>
 
             <div class="available-number">
@@ -31,13 +35,21 @@
                 :key="input"
                 :id="input.id"
                 :textLabel="input.label"
+                :valueModal="clientForm[input.model]"
                 :value="clientForm[input.model]"
-                :type="input.type"  
-                :pattern="input.pattern"          
+                :type="input.type"            
                 required="true"
-                @input="valueSelected(input.model, $event.target.value )"
+                @input="valueSelected(input.model, $event)"
                 
             />
+            <!-- <label for="nameInput">Nombre*:</label>
+            <input id="nameInput" type="text" required v-model="clientForm.name">
+            
+            <label for="phoneInput">Teléfono*:</label>
+            <input id="phoneInput" type="tel" pattern="[0-9]{9}" required v-model="clientForm.phone">
+            
+            <label for="clientInput">Comensales*:</label>
+            <input id="clintInput" type="number" min="1" required v-model="clientForm.diners"> -->
 
             <span class="privacity-container">
                 <input type="checkbox" id="privacity-clausula" v-model="checkedPrivacity" required >
@@ -103,7 +115,7 @@ const tableZone = [
 
 const inputFormUser = [ 
     {label: 'Nombre*:', id: 'nameInput' , model: 'name', type: 'text' },
-    {label: 'Teléfono*:', id: 'phoneInput', model: 'phone', type: 'tel', pattern:"[0-9]{9}" },
+    {label: 'Teléfono*:', id: 'phoneInput', model: 'phone', type: 'tel' },
     {label: 'Comensales*:', id: 'clientInput', model: 'diners', type: 'number'},
 ]
 
@@ -267,13 +279,28 @@ const inputFormUser = [
            return checkedHour.value = valueInput
         }
 
-        const valueSelected = ( modalValue, value ) => {
+        const valueSelected = ( modalValue,event ) => {
+            console.log(event.target['_value'])
             if(modalValue === 'checkedTable'){
-                checkedTable.value = value
-            } else {
-                clientForm.value[ modalValue ] = value
+                checkedTable.value = event.target['_value']
             }
-        
+            
+        //     if(modalValue === 'checkedHour'){
+        //         checkedHour.value = valueInput
+        //     }
+
+        //     if(modalValue === 'name'){
+        //         clientForm.value.name = valueInput
+        //     }
+        //     if(modalValue === 'phone'){
+        //         clientForm.value.phone
+        //     }
+
+        //     if(modalValue === 'diners'){
+        //         clientForm.value.diners
+        //     }
+        //     console.log(modalValue,valueInput)
+        //    return valueInput
         }
 
         getReserveApi()

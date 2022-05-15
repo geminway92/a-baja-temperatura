@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "@vue/reactivity"
+import { ref, computed } from "@vue/reactivity"
 
 
 const props = defineProps({
@@ -7,9 +7,7 @@ const props = defineProps({
     value: [String, Number],
     id: String,
     textLabel: String,
-    name: String,
     required: String,
-    pattern: String,
     isRowReverse: {
         type: Boolean,
         default: false
@@ -20,8 +18,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['input'])
-
+const emit = defineEmits(['change', 'input'])
 
 </script>
 <template>
@@ -30,11 +27,10 @@ const emit = defineEmits(['input'])
         <input 
             v-model="value"
             :id="id" 
-            :type="type" 
-            :name="name"  
+            type="radio" 
+            :value="value"
             :required="required"
-            :pattern="pattern"
-            @input="emit('input', $event)"
+            @change="emit('change', $event)"
         >
     </div>
 </template>
