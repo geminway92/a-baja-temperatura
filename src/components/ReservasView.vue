@@ -1,8 +1,8 @@
 <template>
     <div class="reservasView">
         <form @submit.prevent="validateForm">
-            <label for="dateReserva">Elige fecha</label>
-            <input v-model="dateSelect" id="dateReserva" type="date" :min="attributeMin"  required @change="getReserveApi">
+            <label for="dateReserve">Elige fecha</label>
+            <input v-model="dateSelect" id="dateReserve" type="date" :min="attributeMin"  required @change="getReserveApi">
 
             <div class="container-toggle-hour" @change="getReserveApi">
                 <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
@@ -39,11 +39,19 @@
                 
             />
 
-            <span class="privacity-container">
-                <input type="checkbox" id="privacity-clausula" v-model="checkedPrivacity" required >
+            <p class="privacity-container" >
+                <base-input 
+                    type="checkbox" 
+                    id="privacity-clausula"  
+                    :value="checkedPrivacity" 
+                    required="true" 
+                    isFlex
+                    @input="valueSelected('checkedPrivacity', $event)"
+                />
                 Acepto la Cláusula de privacidad: Con objeto de dar cumplimiento a las obligaciones derivadas del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD) le informa que al marcar este check usted da su consentimiento para que sus datos personales quedan incorporados a los ficheros de datos de carácter personal de  para la prestación de servicios por parte de la misma y prospección comercial. El Responsable del mencionado fichero es "A baja temperatura" con email info@abajatemperatura.com a la cual usted podrá remitir un comunicado identificado con la referencia Protección de Datos para el ejercicio de sus derechos de acceso rectificación cancelación olvido limitación portabilidad y oposición.
-            </span>
-            
+            </p>
+    
+
             <button type="submit">Reservar</button>
         </form>
         
@@ -270,6 +278,8 @@ const inputFormUser = [
         const valueSelected = ( modalValue, value ) => {
             if(modalValue === 'checkedTable'){
                 checkedTable.value = value
+            } else if ( modalValue === 'checkedPrivacity'){
+                checkedPrivacity.value = !checkedPrivacity.value
             } else {
                 clientForm.value[ modalValue ] = value
             }
@@ -311,7 +321,7 @@ button:active{
     background: #ffffff;
 }
 
-#dateReserva{
+#dateReserve{
     padding: .5em;
     font-size: 1.2em;
     
@@ -334,8 +344,11 @@ input[type="text"], input[type="email"], input[type="number"], input[type="tel"]
     gap: 1em;
 }
 .privacity-container{
+    display: flex;
+    gap: .2em;
     width: 80%;
     text-align: justify;
+    // margin: 0;
 }
 
 textarea {

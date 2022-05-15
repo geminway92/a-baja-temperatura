@@ -4,13 +4,17 @@ import { ref } from "@vue/reactivity"
 
 const props = defineProps({
     type: String,
-    value: [String, Number],
+    value: [String, Number, Boolean],
     id: String,
     textLabel: String,
     name: String,
     required: String,
     pattern: String,
     isRowReverse: {
+        type: Boolean,
+        default: false
+    },
+    isFlex: {
         type: Boolean,
         default: false
     },
@@ -25,7 +29,7 @@ const emit = defineEmits(['input'])
 
 </script>
 <template>
-    <div :class="{'row-reverse d-flex': isRowReverse }">
+    <div :class="{'row-reverse d-flex': isRowReverse, 'd-flex': isFlex }">
         <label :class="{'d-block pb-1': !isInline }" :for="id">{{textLabel}}</label>
         <input 
             v-model="value"
