@@ -62,7 +62,7 @@
 
 <script setup>
 import reserveApi from '../api/reserveApi'
-import { computed, ref } from '@vue/runtime-core';
+import { ref } from '@vue/runtime-core';
 import { useToast } from "vue-toastification";
 
 import BaseToggle from './BaseToggle.vue';
@@ -88,13 +88,15 @@ const toast = useToast();
     let attributeMin = ref('');
 
 const sheduleHourArray = [
-    '12:00',
     '12:30',
+    '13:00',
+    '13:30',
     '14:00',
     '14:30',
     '15:00',
     '15:30',
     '16:00',
+    '19:30',
     '20:00',
     '20:30',
     '21:00',
