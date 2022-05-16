@@ -4,7 +4,7 @@ import { useToast } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 import ContactComponent from '../components/ContactComponent.vue';
-import ReservasView from "../components/ReservasView.vue";
+import ReserveView from "../components/ReserveView.vue";
 
 
 const toast = useToast();
@@ -51,7 +51,7 @@ const calcWidthScreen = () => {
     <h2 class="info-restaurant">Ofrecemos a nuestros clientes una experiencia única, ven a probar las deliciosas... </h2>
 
     <h3>¡Puedes reservar Online!</h3>
-    <reservas-view @modal="modal"/>
+    <reserve-view @modal="modal"/>
   </div>
 </template>
 
