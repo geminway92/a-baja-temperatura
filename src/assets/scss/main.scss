@@ -14,10 +14,44 @@
     flex-direction: column;
 }
 
+.m-0 {
+    margin: 0;
+}
+
 .pb-1{
     padding-bottom: .5em;
+}
+.pb-2{
+    padding-bottom: 1em;
 }
 
 .pr-1{
     padding-right: .5em;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.font-primary{
+    font-family: 'Cormorant Garamond', serif;
+}
+.font-secundary{
+    font-family: 'Jost';
+}
+
+.text-xs {
+    font-size: 12px;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.text-base{
+    font-size: 16px;
+}
+
+.text-l {
+    font-size: 20px;
 }
