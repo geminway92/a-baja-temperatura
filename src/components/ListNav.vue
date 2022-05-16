@@ -19,7 +19,7 @@ const router = useRouter()
 const nameRoutes = [
         {name: 'about', textRoute: 'Acerca de nosotros'},
         {name:  'main', textRoute: 'Carta'},
-        {name: 'main-drinks', textRoute: 'Carta Bebidas'},
+        {name: 'main-drinks', textRoute: 'Bebidas'},
         {name: 'main-day', textRoute: 'Menú del día'},
     ]
 

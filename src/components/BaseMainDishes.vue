@@ -1,8 +1,10 @@
 <script setup>
-
+import {listSrcAllergens} from '../assets/data/listSrcAllergens';
 const props = defineProps({
     mainObject: Object
 })
+console.log(listSrcAllergens["Daily"].icon)
+
 </script>
 
 <template>
@@ -11,19 +13,28 @@ const props = defineProps({
         <div
             v-for="dish in Object.values(mainObject[main])" :key="dish" 
             class="list-menu">
+
             <h2>{{ dish.nameDishes }}</h2>
-            <h3>{{ dish.ingredients }}</h3>    
+            <h3>{{ dish.ingredients }}</h3>
+
+            <div class="alergenos" >
+                <img v-for="item in dish.allergens" :key="item"  :src="listSrcAllergens[item]?.icon" alt="">
+            </div>
+
             <div  v-for="accompaniment in dish.accompaniments" :key="accompaniment">
                 <span class="d-block text-bold text-l pb-1">{{ $t( Object.keys(dish).toString() ) }}</span>
                 <p class="font-secundary m-0">{{ accompaniment.name }}</p>
+                <div class="alergenos" >
+                    <img v-for="item in accompaniment.allergens" :key="item"  :src="listSrcAllergens[item]?.icon" alt="">
+                </div>
             </div>
+
             <div  v-for="cash in dish.price" :key="cash" >
                 <span class="d-block text-bold text-l pb-1" >{{ $t( Object.keys(dish).toString() ) }}</span>
                 <p class="font-secundary m-0">{{ cash }}€</p>
             </div>
-        </div>
-        
 
+        </div>
     
     </div>
 </template>
@@ -39,6 +50,11 @@ const props = defineProps({
     font-family: 'Jost';
     src: url(../assets/fonts/Jost-Italic-VariableFont_wght.ttf);
 }
+
+img{
+    width: 25px;
+}
+
 .container-main{
     display: flex;
     flex-direction: column;

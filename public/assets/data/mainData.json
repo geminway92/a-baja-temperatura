@@ -1,23 +1,23 @@
 
 {
     "menuOfTheDay": [
-        { "nameDishes": "Parrillada de verduras con queso de Ronda y virutas de ibérico", 
+        { "nameDishes": "Parrillada de verduras con queso manchego y virutas de ibérico", 
           "ingredients": "Berenjena, Calabacín, Tomate, Pimiento rojo y verde, Espárrago verde, Salsa de queso manchego, Virutas de jamón ibérico",
-          "allergens": "Lactosa"
+          "allergens": ["Daily"]
         },
         { "nameDishes": "Suprema de salmón con salsa de almendras y veeduritas salteadas ", 
           "ingredients": "Salmón, Salsa de almendras, Brócoli y Cherry",
-          "allergens": "Pescado, Frutos de cáscara, Lactosa"
+          "allergens": [ "Fish", "Nut", "Daily"]
         },
         { "nameDishes": "Flan de huevo", 
           "ingredients": "Huevo, Leche, Azúcar",
-          "allergens": "Huevo, Lactosa"
+          "allergens": [ "Egg", "Daily"]
         },
         {
           "accompaniments": [
             {
               "name": "Pan",
-              "allergens": "Gluten"
+              "allergens": [ "Gluten" ]
             }
           ]
         },

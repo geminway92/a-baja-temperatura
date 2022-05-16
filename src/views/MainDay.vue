@@ -2,7 +2,7 @@
 <script setup>
 import { ref } from "@vue/reactivity";
 import BaseMainDishes from "../components/BaseMainDishes.vue";
-import mainData from '../assets/data/mainData.json';
+import mainData from '../../public/assets/data/mainData.json';
 
 
 
@@ -22,5 +22,6 @@ console.log(mainDay.value)
   position: relative;
   top: 4em;
   height: 100vh;
+  margin-bottom: 4em;
 }
 </style>
