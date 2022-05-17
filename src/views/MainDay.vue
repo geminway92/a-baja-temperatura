@@ -20,8 +20,11 @@ console.log(mainDay.value)
 <style>
 .menu-dia{
   position: relative;
-  top: 4em;
-  height: 100vh;
-  margin-bottom: 4em;
+  margin-top: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
 }
+
 </style>

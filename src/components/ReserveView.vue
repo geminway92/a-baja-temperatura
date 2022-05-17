@@ -323,6 +323,10 @@ button:active{
     background: #ffffff;
 }
 
+.reservasView{
+    min-height: 100vh;
+}
+
 #dateReserve{
     padding: .5em;
     font-size: 1.2em;

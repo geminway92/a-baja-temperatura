@@ -24,6 +24,7 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* bottom: 0; */
     width: 100%;
     background: #daad68;
     padding: 1em 0;
@@ -41,6 +42,7 @@ img{
   height: 30px;  
   padding: .2em;
 }
+
 
 
 </style>

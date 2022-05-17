@@ -63,7 +63,6 @@ const calcWidthScreen = () => {
   align-items: center;
   position: relative;
   text-align: center;
-  height: min-content;
 }
 .logo{
   border-radius: 50%;

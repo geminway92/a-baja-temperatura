@@ -13,9 +13,11 @@ console.log(listSrcAllergens["Daily"].icon)
         <div
             v-for="dish in Object.values(mainObject[main])" :key="dish" 
             class="list-menu">
-
-            <h2>{{ dish.nameDishes }}</h2>
-            <h3>{{ dish.ingredients }}</h3>
+            
+            <div  v-if="dish.nameDishes" class="dish">
+                <h2>{{ dish.nameDishes }}</h2>
+                <h3>{{ dish.ingredients }}</h3>
+            </div>
 
             <div class="alergenos" >
                 <img v-for="item in dish.allergens" :key="item"  :src="listSrcAllergens[item]?.icon" alt="">
@@ -59,6 +61,7 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: min-content;
     font-family: 'Cormorant Garamond', serif;
 }
 
@@ -78,7 +81,7 @@ img{
     margin: 0;
     font-weight: 100;
     font-family: 'Jost', sans-serif;
-    color: $textPlaceholder;
+    color: #626262;
 }
 
 

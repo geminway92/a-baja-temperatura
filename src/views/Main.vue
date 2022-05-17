@@ -13,7 +13,7 @@ export default {
 <style>
 .carta{
   position: relative;
-  top: 4em;
-  height: 100vh;
+  margin-top: 4em;
+  min-height: 100vh;
 }
 </style>
