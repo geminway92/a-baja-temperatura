@@ -30,7 +30,7 @@ const calcWidthScreen = () => {
 
 <template>
   <div class="about">
-    <img class="logo" src="../assets/logo.jpeg" alt="logo a baja temperatura">
+    <img class="logo b-shadow" src="../assets/logo.jpeg" alt="logo a baja temperatura">
 
     <div class="container-shedule">
       <h1>Horario</h1>
@@ -40,6 +40,7 @@ const calcWidthScreen = () => {
 
     <iframe  
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3201.6376953097883!2d-4.4916463!3d36.63510670000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72fbc2dd7414d1%3A0x5cd43e162a1a8ae8!2sAv.%20Marife%20de%20Triana%2C%2014%2C%2029620%20Torremolinos%2C%20M%C3%A1laga!5e0!3m2!1ses!2ses!4v1652218001041!5m2!1ses!2ses" 
+      title="map-google"
       :width="widthMap" 
       height="300" 
       style="border:0;" 
@@ -51,7 +52,7 @@ const calcWidthScreen = () => {
     <h2 class="info-restaurant">Ofrecemos a nuestros clientes una experiencia única, ven a probar las deliciosas... </h2>
 
     <h3>¡Puedes reservar Online!</h3>
-    <reserve-view @modal="modal"/>
+    <reserve-view @modal="modal" bgColor="#daad68"/>
   </div>
 </template>
 
