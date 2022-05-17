@@ -8,7 +8,6 @@ import mainData from '../../public/assets/data/mainData.json';
 
 
 let mainDay = ref(mainData)
-console.log(mainDay.value)
 
 </script>
 
@@ -22,9 +21,16 @@ console.log(mainDay.value)
   position: relative;
   margin-top: 4em;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  place-content: center;
   padding: 1em;
+  height: min-content;
+}
+
+@media screen and (min-width: 700px) {
+  .menu-dia{
+    align-items: center;
+    height: 100vh;
+  }
 }
 
 </style>

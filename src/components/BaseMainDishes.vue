@@ -1,9 +1,10 @@
 <script setup>
 import {listSrcAllergens} from '../assets/data/listSrcAllergens';
+
 const props = defineProps({
     mainObject: Object
 })
-console.log(listSrcAllergens["Daily"].icon)
+
 
 </script>
 
@@ -61,8 +62,9 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: min-content;
+    justify-content: space-around;
     font-family: 'Cormorant Garamond', serif;
+    height: 100%;
 }
 
 .list-menu {

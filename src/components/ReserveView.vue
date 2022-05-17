@@ -278,7 +278,6 @@ const inputFormUser = [
         };
 
         const receiveValue = ( valueInput ) => {
-            console.log(checkedHour.value)
            return checkedHour.value = valueInput
         }
 
