@@ -287,7 +287,6 @@ const inputFormUser = [
             } else {
                 clientForm.value[ modalValue ] = value
             }
-            console.log(modalValue, value)
         }
 
         getReserveApi()
@@ -297,11 +296,6 @@ const inputFormUser = [
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 
-//quitar luego al pasar
-label{
-    font-size: 1em;
-    font-weight: bold;
-}
 
 form{
     display: flex;
@@ -341,12 +335,6 @@ button:active{
     flex-wrap: wrap;
 }
 
-//quitar luego al pasar
-
-input[type="text"], input[type="email"], input[type="number"], input[type="tel"], textarea {
-    padding: .5em;
-    font-size: 1em;
-}
 .container-toggle-tab{
     display: flex;
     gap: 1em;
@@ -356,7 +344,6 @@ input[type="text"], input[type="email"], input[type="number"], input[type="tel"]
     gap: .2em;
     width: 80%;
     text-align: justify;
-    // margin: 0;
 }
 
 textarea {
