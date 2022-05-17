@@ -1,6 +1,6 @@
 export const listSrcAllergens = {
     "Daily": {
-        icon: "../../../public/assets/svg/icons-allergens/Daily.svg",
+        icon: "../assets/svg/icons-allergens/Daily.svg",
         nameIcon: "Lactosa"
     },
     "Fish": {
