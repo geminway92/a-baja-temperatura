@@ -5,7 +5,7 @@
             <input v-model="dateSelect" id="dateReserve" type="date" :min="attributeMin"  required @change="getReserveApi">
 
             <div class="container-toggle-hour m-1" @change="getReserveApi">
-                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @receiveValue="receiveValue" :checkedHour="checkedHour" />
+                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @valueSelected="valueSelected" :checkedHour="checkedHour" />
             </div>
             
             <div class="container-toggle-tab">
@@ -277,19 +277,17 @@ const inputFormUser = [
                 
         };
 
-        const receiveValue = ( valueInput ) => {
-           return checkedHour.value = valueInput
-        }
-
         const valueSelected = ( modalValue, value ) => {
             if(modalValue === 'checkedTable'){
                 checkedTable.value = value
             } else if ( modalValue === 'checkedPrivacity'){
                 checkedPrivacity.value = !checkedPrivacity.value
+            } else if ( modalValue === 'checkedHour' ) {
+                checkedHour.value = value
             } else {
                 clientForm.value[ modalValue ] = value
             }
-        
+            console.log(modalValue, value)
         }
 
         getReserveApi()
