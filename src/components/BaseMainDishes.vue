@@ -79,6 +79,7 @@ img{
 .list-menu h3 {
     font-size: 16px;
     margin: 0;
+    font-weight: normal;
     font-family: 'Jost', sans-serif;
     color: #626262;
 }
