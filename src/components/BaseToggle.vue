@@ -30,7 +30,7 @@ const passValueInput = computed(() => {
 </script>
 
 <template>
-    <div class="toggle-hour" @change="emit('getReserveApi')" >
+    <div class="toggle-hour" @change="emit('getReserveApi')">
         <input :id="hour" type="radio" name="hour" :value="hour" v-model="valueInput">
         <label class="b-shadow" :for="hour">{{ hour }}</label>
     </div>

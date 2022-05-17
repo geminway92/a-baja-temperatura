@@ -5,7 +5,7 @@
             <input v-model="dateSelect" id="dateReserve" type="date" :min="attributeMin"  required @change="getReserveApi">
 
             <div class="container-toggle-hour" @change="getReserveApi">
-                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
+                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" tabindex="0" />
             </div>
             
             <div class="container-toggle-tab">
