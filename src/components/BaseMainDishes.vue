@@ -84,12 +84,5 @@ img{
     color: #626262;
 }
 
-@media screen and (min-width: 700px) {
-.list menu h3 {
-    font-weight: 100;
-}
-
-}
-
 
 </style>
