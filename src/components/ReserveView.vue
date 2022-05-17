@@ -4,8 +4,8 @@
             <label for="dateReserve">Elige fecha</label>
             <input v-model="dateSelect" id="dateReserve" type="date" :min="attributeMin"  required @change="getReserveApi">
 
-            <div class="container-toggle-hour" @change="getReserveApi">
-                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" tabindex="0" />
+            <div class="container-toggle-hour m-1" @change="getReserveApi">
+                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @receiveValue="receiveValue" :checkedHour="checkedHour" />
             </div>
             
             <div class="container-toggle-tab">
@@ -278,6 +278,7 @@ const inputFormUser = [
         };
 
         const receiveValue = ( valueInput ) => {
+            console.log(checkedHour.value)
            return checkedHour.value = valueInput
         }
 

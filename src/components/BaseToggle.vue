@@ -20,17 +20,12 @@ const props = defineProps({
 
 let valueInput = ref(props.checkedHour);
 
-const passValueInput = computed(() => {
-    emit('receiveValue', valueInput.value)
-    return props.checkedHour
-})
-
 
 
 </script>
 
 <template>
-    <div class="toggle-hour" @change="emit('getReserveApi')">
+    <div class="toggle-hour" @click="emit('receiveValue', hour)">
         <input :id="hour" type="radio" name="hour" :value="hour" v-model="valueInput">
         <label class="b-shadow" :for="hour">{{ hour }}</label>
     </div>
@@ -38,7 +33,6 @@ const passValueInput = computed(() => {
 
 <style scoped>
 label{
-    font-size: 1em;
     font-weight: bold;
     font-size: 20px;
 }
