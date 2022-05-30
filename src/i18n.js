@@ -3,6 +3,7 @@ import { createI18n } from 'vue-i18n'
 const messages = {
     es: {
       "menuOfTheDay"  : "Menú del día",
+      "ColdStarters"  : "Entrantes fríos",
       "accompaniments" : "Complementos",
       "price"         : "Precio"
     }

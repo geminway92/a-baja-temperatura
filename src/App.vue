@@ -33,6 +33,15 @@ import FooterComponent from './components/FooterComponent.vue';
 
 <style lang="scss">
 @import "./assets/scss/variables.scss";
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: 
+    url(../assets/fonts/CormorantGaramond-Regular.ttf);
+}
+@font-face {
+    font-family: 'Jost';
+    src: url(../assets/fonts/Jost-Italic-VariableFont_wght.ttf);
+}
 
 .container{
   position: relative;

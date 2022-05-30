@@ -1,28 +1,30 @@
 
 {
-    "menuOfTheDay": [
-        { "nameDishes": "Parrillada de verduras con queso manchego y virutas de ibérico", 
-          "ingredients": "Berenjena, Calabacín, Tomate, Pimiento rojo y verde, Espárrago verde, Salsa de queso manchego, Virutas de jamón ibérico",
-          "allergens": ["Daily"]
-        },
-        { "nameDishes": "Suprema de salmón con salsa de almendras y veeduritas salteadas ", 
-          "ingredients": "Salmón, Salsa de almendras, Brócoli y Cherry",
-          "allergens": [ "Fish", "Nut", "Daily"]
-        },
-        { "nameDishes": "Flan de huevo", 
-          "ingredients": "Huevo, Leche, Azúcar",
-          "allergens": [ "Egg", "Daily"]
-        },
+
+  "menuOfTheDay": [
+    { "nameDishes": "Parrillada de verduras con queso manchego y virutas de ibérico", 
+      "ingredients": "Berenjena, Calabacín, Tomate, Pimiento rojo y verde, Espárrago verde, Salsa de queso manchego, Virutas de jamón ibérico",
+      "allergens": ["Daily"]
+    },
+    { "nameDishes": "Suprema de salmón con salsa de almendras y veeduritas salteadas ", 
+      "ingredients": "Salmón, Salsa de almendras, Brócoli y Cherry",
+      "allergens": [ "Fish", "Nut", "Daily"]
+    },
+    { "nameDishes": "Flan de huevo", 
+      "ingredients": "Huevo, Leche, Azúcar",
+      "allergens": [ "Egg", "Daily"]
+    },
+    {
+      "accompaniments": [
         {
-          "accompaniments": [
-            {
-              "name": "Pan",
-              "allergens": [ "Gluten" ]
-            }
-          ]
-        },
-        {
-          "price": [ "12"]
+          "name": "Pan",
+          "allergens": [ "Gluten" ]
         }
-    ]
+      ]
+    },
+    {
+      "price": [ "12"]
+    }
+  ]
+
 }

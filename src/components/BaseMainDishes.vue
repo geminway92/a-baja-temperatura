@@ -2,17 +2,19 @@
 import {listSrcAllergens} from '../assets/data/listSrcAllergens';
 
 const props = defineProps({
-    mainObject: Object
+    mainObject: Object,
+    titleMain: String
 })
 
 
 </script>
 
+
 <template>
-    <div class="container-main" v-for="main in Object.keys(mainObject)" :key="main">
-        <h1>{{ $t( main )}}</h1>
+    <div class="container-main">
+        <h1>{{ $t( titleMain )}}</h1>
         <div
-            v-for="dish in Object.values(mainObject[main])" :key="dish" 
+            v-for="dish in Object.values(mainObject)" :key="dish" 
             class="list-menu">
             
             <div  v-if="dish.nameDishes" class="dish">
@@ -20,14 +22,14 @@ const props = defineProps({
                 <h3>{{ dish.ingredients }}</h3>
             </div>
 
-            <div class="alergenos" >
+            <div class="allergens" >
                 <img v-for="item in dish.allergens" :key="item"  :src="listSrcAllergens[item]?.icon" alt="">
             </div>
 
             <div  v-for="accompaniment in dish.accompaniments" :key="accompaniment">
                 <span class="d-block text-bold text-l pb-1">{{ $t( Object.keys(dish).toString() ) }}</span>
                 <p class="font-secundary m-0">{{ accompaniment.name }}</p>
-                <div class="alergenos" >
+                <div class="allergens" >
                     <img v-for="item in accompaniment.allergens" :key="item"  :src="listSrcAllergens[item]?.icon" alt="">
                 </div>
             </div>
@@ -44,15 +46,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
-@font-face {
-    font-family: 'Cormorant Garamond';
-    src: 
-    url(../assets/fonts/CormorantGaramond-Regular.ttf);
-}
-@font-face {
-    font-family: 'Jost';
-    src: url(../assets/fonts/Jost-Italic-VariableFont_wght.ttf);
-}
+
 
 img{
     width: 25px;
@@ -85,6 +79,4 @@ img{
     font-family: 'Jost', sans-serif;
     color: #626262;
 }
-
-
 </style>

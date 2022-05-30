@@ -18,5 +18,17 @@ export const listSrcAllergens = {
     "Gluten": {
         icon: "../assets/svg/icons-allergens/Gluten.svg",
         nameIcon: "Gluten"
+    },
+    "Sulfites": {
+        icon: "../assets/svg/icons-allergens/Sulfites.svg",
+        nameIcon: "Sulfito"
+    },
+    "Crustaceans": {
+        icon: "../assets/svg/icons-allergens/crustaceans.svg",
+        nameIcon: "Crustáceos"
+    },
+    "Mollusks": {
+        icon: "../assets/svg/icons-allergens/mollusks.svg",
+        nameIcon: "Molusco"
     }
 }

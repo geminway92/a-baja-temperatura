@@ -13,7 +13,8 @@ let mainDay = ref(mainData)
 
 <template>
   <div class="menu-dia">
-    <base-main-dishes :mainObject="mainDay" />
+    <base-main-dishes :mainObject="mainData['menuOfTheDay']" titleMain="menuOfTheDay" />
+    
   </div>
 </template>
 <style>
