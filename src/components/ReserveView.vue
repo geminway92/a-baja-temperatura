@@ -1,23 +1,24 @@
 <template>
     <div class="reservasView">
         <form @submit.prevent="validateForm">
-            <label for="dateReserva">Elige fecha</label>
-            <input v-model="dateSelect" id="dateReserva" type="date" :min="attributeMin"  required @change="getReserveApi">
+            <label for="dateReserve">Elige fecha</label>
+            <input v-model="dateSelect" id="dateReserve" type="date" :min="attributeMin"  required @change="getReserveApi">
 
-            <div class="container-toggle-hour" @change="getReserveApi">
-                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" bgColor="#daad68" @click="receiveValue(hour)" @receiveValue="receiveValue" :checkedHour="checkedHour" />
+            <div class="container-toggle-hour m-1" @change="getReserveApi">
+                <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @valueSelected="valueSelected" :checkedHour="checkedHour" />
             </div>
             
             <div class="container-toggle-tab">
-
-                <div>
-                    <input id="tableInterior" type="radio" name="tableInterior"  value="Interior"  v-model="checkedTable">
-                    <label for="tableInterior">Mesa Interior</label>
-                </div>
-                <div>
-                    <input id="tableExterior" type="radio" name="tableExterior"  value="Exterior"  v-model="checkedTable">
-                    <label for="tableExterior">Mesa Exterior</label>
-                </div>
+                <base-radio 
+                    v-for="zone in tableZone" 
+                    :key="zone" 
+                    :id="zone.tableLocation"
+                    :value="zone.tableLocation"
+                    :textLabel="zone.textLabel"
+                    :valueSelected="checkedTable"
+                    @change="valueSelected('checkedTable',$event.target.value )"
+                    isRowReverse
+                />
             </div>
 
             <div class="available-number">
@@ -25,21 +26,32 @@
                 <p><span :class="{available: tableAvailableExterior,'not-available': tableAvailableExterior === 0  }">{{tableAvailableExterior}}</span> Disponible Exterior</p>
             </div>
 
+            <base-input 
+                v-for="input in inputFormUser"
+                :key="input"
+                :id="input.id"
+                :textLabel="input.label"
+                :value="clientForm[input.model]"
+                :type="input.type"  
+                :pattern="input.pattern"          
+                required="true"
+                @input="valueSelected(input.model, $event.target.value )"
+                
+            />
 
-            <label for="nameInput">Nombre*:</label>
-            <input id="nameInput" type="text" required v-model="clientForm.name">
-            
-            <label for="phoneInput">Teléfono*:</label>
-            <input id="phoneInput" type="tel" pattern="[0-9]{9}" required v-model="clientForm.phone">
-            
-            <label for="clientInput">Comensales*:</label>
-            <input id="clintInput" type="number" min="1" required v-model="clientForm.diners">
-
-            <span class="privacity-container">
-                <input type="checkbox" id="privacity-clausula" v-model="checkedPrivacity" required >
+            <p class="privacity-container" >
+                <base-input 
+                    type="checkbox" 
+                    id="privacity-clausula"  
+                    :value="checkedPrivacity" 
+                    required="true" 
+                    isFlex
+                    @input="valueSelected('checkedPrivacity', $event)"
+                />
                 Acepto la Cláusula de privacidad: Con objeto de dar cumplimiento a las obligaciones derivadas del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD) le informa que al marcar este check usted da su consentimiento para que sus datos personales quedan incorporados a los ficheros de datos de carácter personal de  para la prestación de servicios por parte de la misma y prospección comercial. El Responsable del mencionado fichero es "A baja temperatura" con email info@abajatemperatura.com a la cual usted podrá remitir un comunicado identificado con la referencia Protección de Datos para el ejercicio de sus derechos de acceso rectificación cancelación olvido limitación portabilidad y oposición.
-            </span>
-            
+            </p>
+    
+
             <button type="submit">Reservar</button>
         </form>
         
@@ -50,20 +62,26 @@
 
 <script setup>
 import reserveApi from '../api/reserveApi'
-import { computed, ref } from '@vue/runtime-core';
+import { ref } from '@vue/runtime-core';
 import { useToast } from "vue-toastification";
 
 import BaseToggle from './BaseToggle.vue';
+import BaseInput from './BaseInput.vue';
+import BaseRadio from './BaseRadio.vue';
 
 const emit = defineEmits(['modal'])
+const props = defineProps({
+    bgColor: String 
+})
+
 const toast = useToast();
 
 
     let dateSelect =  ref('');
     let clientForm = ref({
         name: '',
-        diners: 1,
         phone: '',
+        diners: 1,
     });
 
     let checkedHour =  ref(null);
@@ -73,15 +91,16 @@ const toast = useToast();
     let tableAvailableExterior = ref(9);
     let attributeMin = ref('');
 
-    const sheduleHourArray = [
-    '12:00',
+const sheduleHourArray = [
     '12:30',
+    '13:00',
+    '13:30',
     '14:00',
     '14:30',
     '15:00',
     '15:30',
     '16:00',
-    '16:30',
+    '19:30',
     '20:00',
     '20:30',
     '21:00',
@@ -89,7 +108,17 @@ const toast = useToast();
     '22:00',
     '22:30',
     '23:00',
-    '23:30',
+]
+
+const tableZone = [
+    { tableLocation: 'Interior', textLabel: 'Mesa Interior' },
+    { tableLocation: 'Exterior', textLabel: 'Mesa Exterior'},
+]
+
+const inputFormUser = [ 
+    {label: 'Nombre*:', id: 'nameInput' , model: 'name', type: 'text' },
+    {label: 'Teléfono*:', id: 'phoneInput', model: 'phone', type: 'tel', pattern:"[0-9]{9}" },
+    {label: 'Comensales*:', id: 'clientInput', model: 'diners', type: 'number'},
 ]
 
     const paramsModal = {
@@ -130,16 +159,20 @@ const toast = useToast();
         const postReserve = async ( isAvailableTable )  => {
 
             try{
-                const {data} = await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, numbTableReserve: isAvailableTable,  zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
+                await reserveApi.post('reserves.json', {dayReserve: dateSelect.value, hourReserve: checkedHour.value, numbTableReserve: isAvailableTable,  zoneReserve: checkedTable.value, clientReserve: clientForm.value } )
                 emit('modal', 'Reserva Realizada', paramsModal )
                 
                 getReserveApi()
 
-                clientForm.value = {
-                    name: '',
-                    diners: 1,
-                    phone: '',
-                },
+                Object.keys(clientForm.value).forEach( key => {
+                    if(key === 'diners'){
+                        clientForm.value[key] = 1
+                        return 
+                    }
+
+                    clientForm.value[key] = ''
+                })
+        
                 checkedPrivacity.value = false
 
             }catch (error){
@@ -165,7 +198,6 @@ const toast = useToast();
                     return false;
                 }
             }else{
-                console.log('necesito', tableNeed, 'tengo', tableAvailableExterior.value)
                 if(tableNeed <= tableAvailableExterior.value){
                      return {isAvailable: true, tableNeed};
                 }else{
@@ -177,21 +209,16 @@ const toast = useToast();
         const checkAvailebleAllZone = async (reservesArray) => {
             let counterDinnerInterior = 0;
             let counterDinnerExterior = 0;
-            const reserveFilterInterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
+            
+            reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Interior')
                     .forEach(element => {
                        counterDinnerInterior = counterDinnerInterior + element.numbTableReserve
-                       console.log(counterDinnerInterior, 'mesas ocupadas')
-                       console.log('comensales', element)
-                    });;
+                    });
 
-                    console.log(counterDinnerInterior, 'total ocupadas')
-                    console.log(counterDinnerExterior, 'total ocupadas')
-            const reserveFilterExterior = reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
+            reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
                 .forEach(element => {
                        counterDinnerExterior = counterDinnerExterior + element.numbTableReserve
-                       console.log(counterDinnerExterior, 'mesas ocupadas')
-                       console.log('comensales', element)
-                    });;
+                    });
             tableAvailableInterior.value = 16 -  counterDinnerInterior
             tableAvailableExterior.value = 9 - counterDinnerExterior
         };
@@ -214,13 +241,10 @@ const toast = useToast();
             let hours = dayActual.getHours().toString().padStart(2,0);
             let minutes = dayActual.getMinutes().toString().padStart(2,0);
             
-            
-            const hoursActual = `${ hours }:${minutes}`
-            return hoursActual;
+            return `${ hours }:${minutes}`;
         }
 
         const getReserveApi = async ( ) => {
-
             checkHourIsPass()
 
             const {data} = await reserveApi.get('reserves.json' )
@@ -240,7 +264,7 @@ const toast = useToast();
                 dateSelect.value = attributeMin.value
             }
                 dateSelect.value = new Date(dateSelect.value).toISOString().substring(0, 10);
-                console.log('dia actual', dayActual,'fechaselec', dateSelect.value)
+        
             if( dayActual === dateSelect.value && checkedHour.value < hourMinActual ){
                 emit('modal', 'Hora inferior de la actual', paramsModal, 'error'  )
                 return false
@@ -253,8 +277,16 @@ const toast = useToast();
                 
         };
 
-        const receiveValue = ( valueInput ) => {
-           return checkedHour.value = valueInput
+        const valueSelected = ( modalValue, value ) => {
+            if(modalValue === 'checkedTable'){
+                checkedTable.value = value
+            } else if ( modalValue === 'checkedPrivacity'){
+                checkedPrivacity.value = !checkedPrivacity.value
+            } else if ( modalValue === 'checkedHour' ) {
+                checkedHour.value = value
+            } else {
+                clientForm.value[ modalValue ] = value
+            }
         }
 
         getReserveApi()
@@ -264,10 +296,6 @@ const toast = useToast();
 <style lang="scss" scoped>
 @import "../assets/scss/variables.scss";
 
-label{
-    font-size: 1em;
-    font-weight: bold;
-}
 
 form{
     display: flex;
@@ -291,7 +319,11 @@ button:active{
     background: #ffffff;
 }
 
-#dateReserva{
+.reservasView{
+    min-height: 100vh;
+}
+
+#dateReserve{
     padding: .5em;
     font-size: 1.2em;
     
@@ -303,16 +335,13 @@ button:active{
     flex-wrap: wrap;
 }
 
-
-input[type="text"], input[type="email"], input[type="number"], input[type="tel"], textarea {
-    padding: .5em;
-    font-size: 1em;
-}
 .container-toggle-tab{
     display: flex;
     gap: 1em;
 }
 .privacity-container{
+    display: flex;
+    gap: .2em;
     width: 80%;
     text-align: justify;
 }

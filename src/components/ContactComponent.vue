@@ -92,4 +92,10 @@ p {
 .contact .icon-ig{
   height: 30px;
 }
+
+@media screen and (min-width: 700px) {
+  .container-contact{
+    flex-direction: row;
+  }
+}
 </style>

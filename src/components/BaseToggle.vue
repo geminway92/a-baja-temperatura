@@ -1,8 +1,7 @@
 <script setup>
 import { ref } from "@vue/reactivity"
-import { computed } from "@vue/runtime-core";
 
-const emit = defineEmits(['receiveValue', 'getReserveApi'])
+const emit = defineEmits(['valueSelected', 'getReserveApi'])
 
 
 const props = defineProps({
@@ -20,26 +19,21 @@ const props = defineProps({
 
 let valueInput = ref(props.checkedHour);
 
-const passValueInput = computed(() => {
-    emit('receiveValue', valueInput.value)
-    return props.checkedHour
-})
-
 
 
 </script>
 
 <template>
-    <div class="toggle-hour" @change="emit('getReserveApi')" >
+    <div class="toggle-hour" @click="emit('valueSelected', 'checkedHour', hour)">
         <input :id="hour" type="radio" name="hour" :value="hour" v-model="valueInput">
-        <label :for="hour">{{ hour }}</label>
+        <label class="b-shadow" :for="hour">{{ hour }}</label>
     </div>
 </template>
 
 <style scoped>
 label{
-    font-size: 1em;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .toggle-hour{

@@ -1,11 +1,7 @@
 <template>
     <nav class="list-nav" :class=" classDinamicList">
         <ul>
-            <li @click="goRoute('about')" >Acerca de nosotros</li>
-            <li @click="goRoute('menu-carta')">Menú - Carta</li>
-            <li @click="goRoute('menu-degustacion')">Menú degustación</li>
-            <li @click="goRoute('carta-bebidas')">Carta Bebidas</li>
-            <li @click="goRoute('menu-dia')">Menú del día</li>    
+            <li v-for="route in nameRoutes" :key="route" @click="goRoute(route.name)" >{{route.textRoute}}</li>
         </ul>
     </nav>
 </template>
@@ -16,8 +12,16 @@ import { useRouter } from 'vue-router';
 const props = defineProps({
     'classDinamicList': String,
     })
+
 const emit = defineEmits(['triggerMenu'])
 const router = useRouter()
+
+const nameRoutes = [
+        {name: 'about', textRoute: 'Acerca de nosotros'},
+        {name:  'main', textRoute: 'Carta'},
+        {name: 'main-drinks', textRoute: 'Bebidas'},
+        {name: 'main-day', textRoute: 'Menú del día'},
+    ]
 
    
     const goRoute = (rute) => {

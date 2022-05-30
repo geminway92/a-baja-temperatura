@@ -22,19 +22,34 @@ import FooterComponent from './components/FooterComponent.vue';
 </script>
 
 <template>
-  <NavbarBase @triggerMenu="triggerMenu"/>
-  <ListNav @triggerMenu="triggerMenu" :classDinamicList="classDinamicList" />
-  <router-view/>
-  <footer-component/>
+  <div class="container">  
+      <NavbarBase @triggerMenu="triggerMenu"/>
+      <ListNav @triggerMenu="triggerMenu" :classDinamicList="classDinamicList" />
+      <router-view/>
+  </div>
+    <footer-component/>
 
 </template>
 
 <style lang="scss">
 @import "./assets/scss/variables.scss";
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: 
+    url(../assets/fonts/CormorantGaramond-Regular.ttf);
+}
+@font-face {
+    font-family: 'Jost';
+    src: url(../assets/fonts/Jost-Italic-VariableFont_wght.ttf);
+}
 
-html, body{
+.container{
+  position: relative;
+  min-height: 100vh;
+}
+
+body{
   margin: 0;
-  height: 100vh;
   color: $text;
   background: $backgroundColor;
 }
@@ -47,7 +62,4 @@ nav {
   padding: 1em;
 }
 
-#app{
-  position: relative;
-}
 </style>
