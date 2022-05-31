@@ -252,6 +252,7 @@ let mainFood = [
     <div class="drinks">
         <div class="container-main">
             <div v-for="drink in mainFood" :key="drink">
+            
                 <h1>{{ drink.nameCategory }}</h1>
                 <div v-for="drinks in drink.drinks" :key="drinks" class="dish">
                 <div style="display:flex;justify-content:space-between">
@@ -261,6 +262,7 @@ let mainFood = [
                 </div>
             </div>
         </div>
+        <div class="background-url"></div>
     </div>
 </template>
 
@@ -269,7 +271,7 @@ let mainFood = [
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 4em;
+  margin-top: 2em;
   min-height: 100vh;
 }
 
@@ -284,6 +286,15 @@ img{
     height: 100%;
     padding: 1rem 5rem;
 }
+
+.background-url{
+  background-image: url('../assets/brown-wooden-flooring.jpg');
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 15%;
+}
+
 
 .list-menu {
     width: 80%;

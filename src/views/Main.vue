@@ -168,6 +168,7 @@ let mainFood = [
         </div>
       </div>
     </div>
+      <div class="background-url"></div>
   </div>
 </template>
 
@@ -176,14 +177,23 @@ let mainFood = [
 
 .main{
   position: relative;
-  margin-top: 4em;
+  margin-top: 2em;
   min-height: 100vh;
   display: flex;
   justify-content: center;
+
 }
 
 img{
     width: 25px;
+}
+
+.background-url{
+  background-image: url('../assets/brown-wooden-flooring.jpg');
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 15%;
 }
 
 .container-main{

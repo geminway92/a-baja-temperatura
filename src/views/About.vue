@@ -53,6 +53,7 @@ const calcWidthScreen = () => {
 
     <h3>¡Puedes reservar Online!</h3>
     <reserve-view @modal="modal" bgColor="#daad68"/>
+    <div class="background-url"></div>
   </div>
 </template>
 
@@ -69,6 +70,14 @@ const calcWidthScreen = () => {
   border-radius: 50%;
   margin-top: 4.5em;
   width: 200px;
+}
+
+.background-url{
+  background-image: url('../assets/brown-wooden-flooring.jpg');
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 15%;
 }
 
 .container-shedule p {
