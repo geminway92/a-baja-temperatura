@@ -8,18 +8,6 @@
                 <base-toggle  v-for="hour in sheduleHourArray" :key="hour" :hour="hour" :bgColor="bgColor" @valueSelected="valueSelected" :checkedHour="checkedHour" />
             </div>
             
-            <div class="container-toggle-tab">
-                <base-radio 
-                    v-for="zone in tableZone" 
-                    :key="zone" 
-                    :id="zone.tableLocation"
-                    :value="zone.tableLocation"
-                    :textLabel="zone.textLabel"
-                    :valueSelected="checkedTable"
-                    @change="valueSelected('checkedTable',$event.target.value )"
-                    isRowReverse
-                />
-            </div>
 
             <div class="available-number">
                 <p><span :class="{available: tableAvailableInterior,'not-available': tableAvailableInterior === 0 }">{{tableAvailableInterior}}</span> Disponibles</p>
@@ -113,6 +101,9 @@ const inputFormUser = [
     {label: 'Teléfono*:', id: 'phoneInput', model: 'phone', type: 'tel', pattern:"[0-9]{9}" },
     {label: 'Comensales*:', id: 'clientInput', model: 'diners', type: 'number'},
 ]
+
+
+ 
 
     const paramsModal = {
         position: "top-center",
