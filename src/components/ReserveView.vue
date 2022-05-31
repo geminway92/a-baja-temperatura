@@ -22,8 +22,7 @@
             </div>
 
             <div class="available-number">
-                <p><span :class="{available: tableAvailableInterior,'not-available': tableAvailableInterior === 0 }">{{tableAvailableInterior}}</span> Disponible Interior</p>
-                <p><span :class="{available: tableAvailableExterior,'not-available': tableAvailableExterior === 0  }">{{tableAvailableExterior}}</span> Disponible Exterior</p>
+                <p><span :class="{available: tableAvailableInterior,'not-available': tableAvailableInterior === 0 }">{{tableAvailableInterior}}</span> Disponibles</p>
             </div>
 
             <base-input 
@@ -88,7 +87,6 @@ const toast = useToast();
     let checkedTable =  ref('Interior');
     let checkedPrivacity =  ref(false);
     let tableAvailableInterior = ref(16)
-    let tableAvailableExterior = ref(9);
     let attributeMin = ref('');
 
 const sheduleHourArray = [
@@ -108,11 +106,6 @@ const sheduleHourArray = [
     '22:00',
     '22:30',
     '23:00',
-]
-
-const tableZone = [
-    { tableLocation: 'Interior', textLabel: 'Mesa Interior' },
-    { tableLocation: 'Exterior', textLabel: 'Mesa Exterior'},
 ]
 
 const inputFormUser = [ 
@@ -197,12 +190,6 @@ const inputFormUser = [
                 }else{
                     return false;
                 }
-            }else{
-                if(tableNeed <= tableAvailableExterior.value){
-                     return {isAvailable: true, tableNeed};
-                }else{
-                     return false;
-                }
             }
         };
 
@@ -214,13 +201,7 @@ const inputFormUser = [
                     .forEach(element => {
                        counterDinnerInterior = counterDinnerInterior + element.numbTableReserve
                     });
-
-            reservesArray.filter( e => e.dayReserve == dateSelect.value && e.hourReserve == checkedHour.value && e.zoneReserve == 'Exterior')
-                .forEach(element => {
-                       counterDinnerExterior = counterDinnerExterior + element.numbTableReserve
-                    });
             tableAvailableInterior.value = 16 -  counterDinnerInterior
-            tableAvailableExterior.value = 9 - counterDinnerExterior
         };
 
         

@@ -63,10 +63,11 @@ li:hover{
     width: 100%;
     transition: all 1s;
     padding: 0;
-    z-index: 1;
+    z-index: 4;
     left: -100%;
     top: 60px;
 }
+
 
 .active {
     animation: activeMenu 1s forwards; 

@@ -30,6 +30,7 @@ const calcWidthScreen = () => {
 
 <template>
   <div class="about">
+    <div class="background-url"></div>
     <img class="logo b-shadow" src="../assets/logo.jpeg" alt="logo a baja temperatura">
 
     <div class="container-shedule">
@@ -52,8 +53,7 @@ const calcWidthScreen = () => {
     <h2 class="info-restaurant">Ofrecemos a nuestros clientes una experiencia única, ven a probar las deliciosas... </h2>
 
     <h3>¡Puedes reservar Online!</h3>
-    <reserve-view @modal="modal" bgColor="#daad68"/>
-    <div class="background-url"></div>
+    <reserve-view class="reserve" @modal="modal" bgColor="#daad68"/>
   </div>
 </template>
 
@@ -77,7 +77,10 @@ const calcWidthScreen = () => {
   width: 100%;
   height: 100%;
   position: absolute;
-  opacity: 15%;
+}
+
+.reserve {
+  z-index: 2;
 }
 
 .container-shedule p {
