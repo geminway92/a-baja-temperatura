@@ -50,7 +50,7 @@ const calcWidthScreen = () => {
       referrerpolicy="no-referrer-when-downgrade">
     </iframe>
 
-    <h2 class="info-restaurant">Ofrecemos a nuestros clientes una experiencia única, ven a probar las deliciosas... </h2>
+    <h2 class="info-restaurant">Ofrecemos a nuestros clientes una experiencia única, ven a probar las deliciosas delicias del chef</h2>
 
     <h3>¡Puedes reservar Online!</h3>
     <reserve-view class="reserve" @modal="modal" bgColor="#daad68"/>
